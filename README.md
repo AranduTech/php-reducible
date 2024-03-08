@@ -1,5 +1,7 @@
 # Reducible Trait
 
+[![Tests](https://github.com/AranduTech/php-reducible/actions/workflows/test.yml/badge.svg)](https://github.com/AranduTech/php-reducible/actions/workflows/test.yml)
+
 A trait to make your classes customizable via a set of reducers.
 
 ## Installation
