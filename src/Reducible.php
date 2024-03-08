@@ -14,14 +14,14 @@ trait Reducible
         }
 
         // less or equal priority
-        $before = array_filter(static::$reducers[$key], function ($item) use ($priority) {
+        $before = array_values(array_filter(static::$reducers[$key], function ($item) use ($priority) {
             return $item['priority'] <= $priority;
-        });
+        }));
 
         // greater priority
-        $after = array_filter(static::$reducers[$key], function ($item) use ($priority) {
+        $after = array_values(array_filter(static::$reducers[$key], function ($item) use ($priority) {
             return $item['priority'] > $priority;
-        });
+        }));
 
         static::$reducers[$key] = [
             ...$before,
@@ -78,8 +78,8 @@ trait Reducible
             $reducer = $item['reducer'];
 
             if (!($reducer instanceof \Closure)) {
-                return $carry;
-            }
+                throw new \TypeError('Reducer is not a closure.');
+            }            
 
             $reducer = $reducer->bindTo(null, static::class);
 
@@ -109,7 +109,7 @@ trait Reducible
             $reducer = $item['reducer'];
 
             if (!($reducer instanceof \Closure)) {
-                return $carry;
+                throw new \TypeError('Reducer is not a closure.');
             }
 
             $reducer = $reducer->bindTo($this, get_class($this));

@@ -77,6 +77,15 @@ class ReducibleTest extends TestCase
         $unsubscribe();
 
         $this->assertEquals(0, count(Subject::getReducer('reducerAlpha')));
+
+        Subject::reducer('reducerAlpha', $reducer);
+
+        $this->assertEquals(1, count(Subject::getReducer('reducerAlpha')));
+
+        Subject::clearReducer('reducerAlpha');
+
+        $this->assertEquals(0, count(Subject::getReducer('reducerAlpha')));
+
     }
 
     public function testSubjectMethods()
@@ -162,6 +171,19 @@ class ReducibleTest extends TestCase
                 'X-Api-Key' => '1234',
             ]
         ], $options);
+    }
+
+    public function testReducersCanBeCalledFromInstance()
+    {
+        $reducer = function ($value) {
+            return $value + 1;
+        };
+
+        Subject::reducer('reducerAlpha', $reducer);
+
+        $subject = new Subject();
+
+        $this->assertEquals(5, $subject->reducerAlpha(4));
     }
    
 }

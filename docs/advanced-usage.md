@@ -4,9 +4,9 @@
 
 There maybe many reasons to use Reducible. However what motivated me was the need to allow certain aspects of a class to be modified by other classes. For example, I have a class that makes API calls and I want to allow other classes to modify the options that are passed to the API call.
 
-This package is similar in some ways to the Laravel's `Macroable` trait, but with these key differences:
+This package is similar in some ways to the Laravel's `Macroable` macros, but with these key differences:
 
-- It allows multiple reducers to be registered for the same method name.
+- It allows multiple closures to be registered for the same method name.
 - When a reducer is called, at least one argument must be passed to it.
 - A reducer closure should always return a value, which will be passed to the next reducer in the chain.
 - If there are no reducers attached to a name, the method will return the first argument passed to it.
@@ -93,6 +93,3 @@ MyClass::reducer('example', function ($value) {
     return $value . $this->property; // $this will be in `MyClass` context
 });
 ```
-
-
-

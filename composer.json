@@ -4,7 +4,8 @@
     "type": "library",
     "license": "MIT",
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "test:coverage": "phpunit --coverage-html coverage"
     },
     "autoload": {
         "psr-4": {
